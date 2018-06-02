@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<!-- Welcome file list -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- Servlet class to be loaded, DispatcherServlet is the root servlet, 
+		redirects the request to appropriate controller -->
+	<servlet>
+		<servlet-name>my-spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+
+		<!-- Instead of this, we can add the my-web-app.servlet.xml ServletContext 
+			resource [/WEB-INF/my-web-app-servlet.xml] This will use the resource of 
+			the Spring Application context. So that multiple WebApplicationContext can 
+			use that and override some of the bean scope -->
+		<!-- We require this configuration when we want to change the default name 
+			/ location of the servlet specific configuration files -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>WEB-INF/classes/applicationContext.xml</param-value>
+			
+		</init-param>
+		<!-- This config loads the Servlet on time of deployment, so that the first 
+			request will not take much time -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- Servlet name for the URL pattern -->
+	<servlet-mapping>
+		<servlet-name>my-spring</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
